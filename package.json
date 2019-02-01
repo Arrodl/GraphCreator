@@ -7,8 +7,11 @@
     "@types/node": "10.12.21",
     "@types/react": "16.7.22",
     "@types/react-dom": "16.0.11",
+    "konva": "^2.6.0",
+    "node-sass": "^4.11.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-konva": "^16.7.1",
     "react-scripts": "2.1.3",
     "typescript": "3.3.1"
   },
