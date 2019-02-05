@@ -28,12 +28,12 @@ export default class GraphService {
         this.props = {
             actions: {
                 create_state: '/graph/state',
-                create_connection: '',
+                create_connection: '/graph/connection',
                 get_states: '/graph',
                 update_state: '/graph/state/{id}',
-                update_connection: '',
+                update_connection: '/graph/connection/{id}',
                 delete_state: '',
-                delete_connection: ''
+                delete_connection: '/graph/connection/{id}'
             }
         }
 
@@ -80,6 +80,40 @@ export default class GraphService {
                 return response.data.state;
             }).catch(error => {
                 return null;
+            })
+    }
+
+    async updateConnection (data: any) : Promise<Boolean> {
+        let endpoint = this.props.actions.update_connection;
+
+        endpoint = endpoint.replace("{id}", data.id)
+
+        return await axios.put(endpoint, { state_to_state: data })
+            .then(response => {
+                return true;
+            }).catch(error => {
+                return false;
+            })
+    }
+
+    async createConnection (data: any) : Promise<any> {
+        return await axios.post(this.props.actions.create_connection, { state_to_state: data })
+            .then(response => {
+                return response.data.state;
+            }).catch(error => {
+                return null;
+            })
+    }
+
+    async deleteConnection (id: number) : Promise<number> {
+        let endpoint = this.props.actions.delete_connection;
+
+        endpoint = endpoint.replace("{id}", `${id}`);
+        return await axios.delete(endpoint)
+            .then(response =>  {
+                return response.data.connection.id
+            }).catch(error => {
+                return 0
             })
     }
 

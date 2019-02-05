@@ -8,6 +8,7 @@ interface INodeProps {
     x: number,
     y: number,
     marked: Boolean,
+    initial: Boolean,
     onOpen(data: any) : void,
     markForConnection(id: number) : void
 }
@@ -63,6 +64,16 @@ export default class Node extends React.Component<INodeProps> {
                     y={this.state.y - 45}
                     radius={10}
                     fill={this.props.marked ? "green" : "yellow"}
+                    onClick={() => {
+                        this.props.markForConnection(this.props.data.id)
+                    }}
+                />
+                <Text
+                    x={this.state.x - 45}
+                    y={this.state.y - 45}
+                    width={10}
+                    align="center"
+                    text={this.props.marked ? this.props.initial ? "I" : "F" : ""}
                     onClick={() => {
                         this.props.markForConnection(this.props.data.id)
                     }}
