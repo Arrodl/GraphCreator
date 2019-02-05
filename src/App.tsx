@@ -457,11 +457,12 @@ class App extends Component {
                         />
                     </DialogContent>
                     <DialogActions>
+                        {connection && connection.id ? 
                         <Button  color="secondary" onClick={() => {
                             this.deleteItem(connection.id, "connection");
                         }}>
                             Eliminar
-                        </Button>
+                        </Button> : ""}
                         <Button onClick={this.handleCloseConnection} color="secondary">
                             Cancelar
                         </Button>
