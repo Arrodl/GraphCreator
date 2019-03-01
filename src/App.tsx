@@ -181,12 +181,12 @@ class App extends Component {
         })
     }
 
-    changeSwitchState = (event : any) => {
+    changeSwitchState = (event : any, identifier: string) => {
         let value = event.target.checked;
         this.setState({
             state: {
                 ...this.state.state,
-                is_media_necessary: value
+                [identifier]: value
             }
         })
     }
@@ -376,12 +376,23 @@ class App extends Component {
                             control={
                                 <Switch
                                     checked={state ? state.is_media_necessary : false}
-                                    onChange={this.changeSwitchState.bind(this)}
+                                    onChange={e => this.changeSwitchState(e, "is_media_necessary")}
                                     value="Es necesario subir archivos"
                                     color="primary"
                                 />
                             }
                             label={"Es necesario subir archivos."}
+                        />
+                        <FormControlLabel 
+                            control={
+                                <Switch
+                                    checked={state ? state.should_trigger_tracking : false}
+                                    onChange={e => this.changeSwitchState(e, 'should_trigger_tracking')}
+                                    value="Inicia tracking"
+                                    color="primary"
+                                />
+                            }
+                            label={"Inicia el tracking."}
                         />
                     </DialogContent>
                     <DialogActions>
@@ -458,7 +469,7 @@ class App extends Component {
                     </DialogContent>
                     <DialogActions>
                         {connection && connection.id ? 
-                        <Button  color="secondary" onClick={() => {
+                        <Button color="secondary" onClick={() => {
                             this.deleteItem(connection.id, "connection");
                         }}>
                             Eliminar
