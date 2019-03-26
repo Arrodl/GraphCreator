@@ -117,6 +117,7 @@ class App extends Component {
     }
 
     openNode = (data: any) => {
+        console.log(data);
         this.setState({
             state: data,
             openState: true
@@ -342,6 +343,8 @@ class App extends Component {
     render() {
         const { state, connection } = this.state;
 
+        console.log(this.state.nodes)
+
         return (
             <React.Fragment>
                 <Stage className="App" width={window.innerWidth} height={window.innerHeight}>
@@ -393,6 +396,17 @@ class App extends Component {
                                 />
                             }
                             label={"Inicia el tracking."}
+                        />
+                        <FormControlLabel 
+                            control={
+                                <Switch
+                                    checked={state ? state.is_date_required : false}
+                                    onChange={e => this.changeSwitchState(e, 'is_date_required')}
+                                    value="Trigger para cambiar la fecha"
+                                    color="primary"
+                                />
+                            }
+                            label={"Trigger para cambiar la fecha."}
                         />
                     </DialogContent>
                     <DialogActions>

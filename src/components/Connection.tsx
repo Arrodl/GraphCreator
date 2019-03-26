@@ -16,7 +16,6 @@ export default class Connection extends React.Component<IConnectionProps> {
     }
 
     render () {
-        console.log(this.props.data.color);
         return(
             <React.Fragment>
                 <Arrow 
